@@ -6,7 +6,7 @@ webpackJsonp([1],{
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FirebaseProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(187);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(101);
 var __assign = (this && this.__assign) || Object.assign || function(t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
         s = arguments[i];
@@ -73,7 +73,7 @@ var FirebaseProvider = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 132:
+/***/ 133:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -133,19 +133,20 @@ var SalvarPage = /** @class */ (function () {
     };
     SalvarPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-salvar',template:/*ion-inline-start:"/home/jimi/Etec/Mobile/appComFirebase/ionicFirebase/src/pages/salvar/salvar.html"*/'\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Salvar</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n<form [formGroup]="form">\n  <ion-item>\n    <ion-label stacked>Produto</ion-label>\n    <ion-input type="text" formControlName="nome" ></ion-input>\n  </ion-item>\n  <ion-item *ngIf="!form.controls.nome.valid && (form.controls.nome.dirty || form.controls.nome.touched)" color="danger">\n    <div [hidden]="!form.controls.nome.errors.required">\n      O campo é obrigatório\n    </div>\n  </ion-item>\n\n  <ion-item>\n    <ion-label stacked>Preço</ion-label>\n    <ion-input type="number" formControlName="preco"></ion-input>\n  </ion-item>\n  <ion-item *ngIf="!form.controls.preco.valid && (form.controls.preco.dirty || form.controls.preco.touched)" color="danger">\n    <div [hidden]="!form.controls.preco.errors.required">\n      O campo é obrigatório\n    </div>\n  </ion-item>\n\n  <ion-item>\n    <ion-label stacked>Descrição</ion-label>\n    <ion-input type="text" formControlName="descricao"></ion-input>\n  </ion-item>\n  <ion-item *ngIf="!form.controls.descricao.valid && (form.controls.descricao.dirty || form.controls.descricao.touched)" color="danger">\n    <div [hidden]="!form.controls.descricao.errors.required">\n      O campo é obrigatório\n    </div>\n  </ion-item>\n\n  <button ion-button full (click)="salvar(produto)">Salvar</button>\n</form>\n\n</ion-content>\n'/*ion-inline-end:"/home/jimi/Etec/Mobile/appComFirebase/ionicFirebase/src/pages/salvar/salvar.html"*/,
+            selector: 'page-salvar',template:/*ion-inline-start:"/home/jimi/Etec/Mobile/appComFirebase/ionicFirebase/src/pages/salvar/salvar.html"*/'\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Salvar</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n<form [formGroup]="form">\n  <ion-item>\n    <ion-label stacked>Produto</ion-label>\n    <ion-input type="text" formControlName="nome" ></ion-input>\n  </ion-item>\n  <ion-item *ngIf="!form.controls.nome.valid && (form.controls.nome.dirty || form.controls.nome.touched)" color="danger">\n    <div [hidden]="!form.controls.nome.errors.required">\n      O campo é obrigatório\n    </div>\n  </ion-item>\n\n  <ion-item>\n    <ion-label stacked>Preço</ion-label>\n    <ion-input type="number" formControlName="preco"></ion-input>\n  </ion-item>\n  <ion-item *ngIf="!form.controls.preco.valid && (form.controls.preco.dirty || form.controls.preco.touched)" color="danger">\n    <div [hidden]="!form.controls.preco.errors.required">\n      O campo é obrigatório\n    </div>\n  </ion-item>\n\n  <ion-item>\n    <ion-label stacked>Descrição</ion-label>\n    <ion-input type="text" formControlName="descricao"></ion-input>\n  </ion-item>\n  <ion-item *ngIf="!form.controls.descricao.valid && (form.controls.descricao.dirty || form.controls.descricao.touched)" color="danger">\n    <div [hidden]="!form.controls.descricao.errors.required">\n      O campo é obrigatório\n    </div>\n  </ion-item>\n\n  <ion-item>\n  <button ion-button full (click)="salvar(produto)">Salvar</button>\n  </ion-item>\n</form>\n\n</ion-content>\n'/*ion-inline-end:"/home/jimi/Etec/Mobile/appComFirebase/ionicFirebase/src/pages/salvar/salvar.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__providers_firebase_firebase__["a" /* FirebaseProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_firebase_firebase__["a" /* FirebaseProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]) === "function" && _e || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_3__providers_firebase_firebase__["a" /* FirebaseProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]])
     ], SalvarPage);
     return SalvarPage;
-    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=salvar.js.map
 
 /***/ }),
 
-/***/ 144:
+/***/ 145:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -158,11 +159,11 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 144;
+webpackEmptyAsyncContext.id = 145;
 
 /***/ }),
 
-/***/ 186:
+/***/ 187:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -182,7 +183,7 @@ function webpackAsyncContext(req) {
 webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
-webpackAsyncContext.id = 186;
+webpackAsyncContext.id = 187;
 module.exports = webpackAsyncContext;
 
 /***/ }),
@@ -194,9 +195,9 @@ module.exports = webpackAsyncContext;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__salvar_salvar__ = __webpack_require__(132);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__salvar_salvar__ = __webpack_require__(133);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_firebase_firebase__ = __webpack_require__(100);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__ = __webpack_require__(187);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__ = __webpack_require__(101);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -229,7 +230,7 @@ var HomePage = /** @class */ (function () {
         // Maneira 1
         //this.navCtrl.push('SalvarPage', { produto: produto });
         // Maneira 2
-        this.navCtrl.push('SalvarPage', { key: produto.key });
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__salvar_salvar__["a" /* SalvarPage */], { key: produto.key });
     };
     HomePage.prototype.deletar = function (key) {
         var _this = this;
@@ -285,8 +286,8 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(275);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_firebase_firebase__ = __webpack_require__(100);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2__ = __webpack_require__(62);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_salvar_salvar__ = __webpack_require__(132);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_angularfire2_database__ = __webpack_require__(187);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_salvar_salvar__ = __webpack_require__(133);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_angularfire2_database__ = __webpack_require__(101);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
