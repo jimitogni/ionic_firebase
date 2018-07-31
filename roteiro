@@ -1,0 +1,9 @@
+criar conta no firebase ou usar a minha
+explicar rapido o que é noSql
+
+ionic start appComFirebase Blank
+cd appComFirebase
+npm i firebase angularfire2 --save
+npm g provider firebase
+npm g page salvar
+ionic serve
