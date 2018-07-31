@@ -59,7 +59,7 @@ var FirebaseProvider = /** @class */ (function () {
             }
         });
     };
-    FirebaseProvider.prototype.deleta = function (key) {
+    FirebaseProvider.prototype.deletar = function (key) {
         return this.db.list('produtos/').remove(key);
     };
     FirebaseProvider = __decorate([
@@ -80,7 +80,8 @@ var FirebaseProvider = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SalvarPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_firebase_firebase__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_firebase_firebase__ = __webpack_require__(100);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -93,32 +94,51 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var SalvarPage = /** @class */ (function () {
-    function SalvarPage(navCtrl, navParams, db, toast) {
+    function SalvarPage(navCtrl, navParams, db, toast, formBuilder) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.db = db;
         this.toast = toast;
+        this.formBuilder = formBuilder;
+        this.produto = this.navParams.data.produto || {};
+        this.createForm();
+        this.setupPageTitle();
     }
-    SalvarPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad SalvarPage');
+    SalvarPage.prototype.setupPageTitle = function () {
+        this.titulo = this.navParams.data.produto ? 'Alterando contato' : 'Novo contato';
+    };
+    SalvarPage.prototype.createForm = function () {
+        this.form = this.formBuilder.group({
+            key: [this.produto.key],
+            nome: [this.produto.nome, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required],
+            preco: [this.produto.preco, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required],
+            descricao: [this.produto.descricao, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required],
+        });
     };
     SalvarPage.prototype.salvar = function (produto) {
         var _this = this;
-        this.db.salvar(produto).then(function () {
-            _this.toast.create({ message: 'Produto salvo com sucesso.', duration: 3000 }).present();
-            _this.navCtrl.pop();
-        });
-        console.log(produto);
+        if (this.form.valid) {
+            this.db.salvar(this.form.value)
+                .then(function () {
+                _this.toast.create({ message: 'Produto salvo com sucesso.', duration: 3000 }).present();
+                _this.navCtrl.pop();
+            })
+                .catch(function (e) {
+                _this.toast.create({ message: 'Erro ao salvar o produto.', duration: 3000 }).present();
+                console.error(e);
+            });
+        }
     };
     SalvarPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-salvar',template:/*ion-inline-start:"/home/jimi/Etec/Mobile/appComFirebase/src/pages/salvar/salvar.html"*/'<!--\n  Generated template for the SalvarPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>salvar</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n  <ion-item>\n    <ion-label fixed>Produto</ion-label>\n    <ion-input type="text" value="" [(ngModel)]="produto.nome"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label fixed>Preço</ion-label>\n    <ion-input type="number" [(ngModel)]="produto.preco"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label fixed>descricao</ion-label>\n    <ion-input type="text" value="" [(ngModel)]="produto.descricao"></ion-input>\n  </ion-item>\n\n  <button ion-button full (click)="salvar(produto)">Salvar</button>\n\n\n</ion-content>\n'/*ion-inline-end:"/home/jimi/Etec/Mobile/appComFirebase/src/pages/salvar/salvar.html"*/,
+            selector: 'page-salvar',template:/*ion-inline-start:"/home/jimi/Etec/Mobile/appComFirebase/ionicFirebase/src/pages/salvar/salvar.html"*/'\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Salvar</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n<form [formGroup]="form">\n  <ion-item>\n    <ion-label stacked>Produto</ion-label>\n    <ion-input type="text" formControlName="nome" ></ion-input>\n  </ion-item>\n  <ion-item *ngIf="!form.controls.nome.valid && (form.controls.nome.dirty || form.controls.nome.touched)" color="danger">\n    <div [hidden]="!form.controls.nome.errors.required">\n      O campo é obrigatório\n    </div>\n  </ion-item>\n\n  <ion-item>\n    <ion-label stacked>Preço</ion-label>\n    <ion-input type="number" formControlName="preco"></ion-input>\n  </ion-item>\n  <ion-item *ngIf="!form.controls.preco.valid && (form.controls.preco.dirty || form.controls.preco.touched)" color="danger">\n    <div [hidden]="!form.controls.preco.errors.required">\n      O campo é obrigatório\n    </div>\n  </ion-item>\n\n  <ion-item>\n    <ion-label stacked>Descrição</ion-label>\n    <ion-input type="text" formControlName="descricao"></ion-input>\n  </ion-item>\n  <ion-item *ngIf="!form.controls.descricao.valid && (form.controls.descricao.dirty || form.controls.descricao.touched)" color="danger">\n    <div [hidden]="!form.controls.descricao.errors.required">\n      O campo é obrigatório\n    </div>\n  </ion-item>\n\n  <button ion-button full (click)="salvar(produto)">Salvar</button>\n</form>\n\n</ion-content>\n'/*ion-inline-end:"/home/jimi/Etec/Mobile/appComFirebase/ionicFirebase/src/pages/salvar/salvar.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_firebase_firebase__["a" /* FirebaseProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_firebase_firebase__["a" /* FirebaseProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */]) === "function" && _d || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__providers_firebase_firebase__["a" /* FirebaseProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_firebase_firebase__["a" /* FirebaseProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]) === "function" && _e || Object])
     ], SalvarPage);
     return SalvarPage;
-    var _a, _b, _c, _d;
+    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=salvar.js.map
@@ -176,6 +196,7 @@ module.exports = webpackAsyncContext;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__salvar_salvar__ = __webpack_require__(132);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_firebase_firebase__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__ = __webpack_require__(187);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -189,12 +210,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var HomePage = /** @class */ (function () {
-    function HomePage(navCtrl, provider, toast) {
+    function HomePage(navCtrl, provider, toast, db) {
         this.navCtrl = navCtrl;
         this.provider = provider;
         this.toast = toast;
+        this.db = db;
         this.produtos = this.provider.listarTodos();
+        //grava algo direto no banco sem passar pelo form e provider
+        //this.db.list('produtos/')
+        //  .push({ nome: 'teste', preco: '333', descricao: 'teste' });
     }
     HomePage.prototype.adicionar = function () {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__salvar_salvar__["a" /* SalvarPage */]);
@@ -219,12 +245,12 @@ var HomePage = /** @class */ (function () {
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"/home/jimi/Etec/Mobile/appComFirebase/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Ionic Blank\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n  <p>APP BONITAO COM FIREBASE</p>\n\n  <ion-list>\n    <ion-item-sliding *ngFor="let produto of produtos | async">\n      <ion-item>\n        <h1>{{ produto.nome }}</h1>\n        <p>{{ produto.preco }}</p>\n        <p>{{ produto.descricao }}</p>\n      </ion-item>\n      <ion-item-options side="left">\n        <button ion-button color="secondary" (click)="editar(produto)">\n          <ion-icon name="create"></ion-icon>\n        </button>\n        <button ion-button color="danger" (click)="deletar(produto.key)">\n          <ion-icon name="trash"></ion-icon>\n        </button>\n      </ion-item-options>\n    </ion-item-sliding>\n  </ion-list>\n\n\n\n  <button ion-button full (click)="adicionar()">Adicionar produto</button>\n\n</ion-content>\n'/*ion-inline-end:"/home/jimi/Etec/Mobile/appComFirebase/src/pages/home/home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"/home/jimi/Etec/Mobile/appComFirebase/ionicFirebase/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Produtos\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n  <h3 text-center>Listagem de produtos:</h3>\n\n  <ion-list>\n    <ion-item-sliding *ngFor="let produto of produtos | async">\n      <ion-item>\n        <h1>{{ produto.nome }}</h1>\n        <p>R$ {{ produto.preco }}</p>\n        <p>{{ produto.descricao }}</p>\n      </ion-item>\n      <ion-item-options side="left">\n        <button ion-button color="secondary" (click)="editar(produto)">\n          <ion-icon name="create"></ion-icon>\n        </button>\n        <button ion-button color="danger" (click)="deletar(produto.key)">\n          <ion-icon name="trash"></ion-icon>\n        </button>\n      </ion-item-options>\n    </ion-item-sliding>\n  </ion-list>\n\n\n\n  <button ion-button full (click)="adicionar()">Adicionar produto</button>\n\n</ion-content>\n'/*ion-inline-end:"/home/jimi/Etec/Mobile/appComFirebase/ionicFirebase/src/pages/home/home.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__providers_firebase_firebase__["a" /* FirebaseProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_firebase_firebase__["a" /* FirebaseProvider */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */]) === "function" && _c || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__providers_firebase_firebase__["a" /* FirebaseProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_firebase_firebase__["a" /* FirebaseProvider */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__["a" /* AngularFireDatabase */]) === "function" && _d || Object])
     ], HomePage);
     return HomePage;
-    var _a, _b, _c;
+    var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=home.js.map
@@ -363,7 +389,7 @@ var MyApp = /** @class */ (function () {
         });
     }
     MyApp = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/home/jimi/Etec/Mobile/appComFirebase/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/home/jimi/Etec/Mobile/appComFirebase/src/app/app.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/home/jimi/Etec/Mobile/appComFirebase/ionicFirebase/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/home/jimi/Etec/Mobile/appComFirebase/ionicFirebase/src/app/app.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
     ], MyApp);

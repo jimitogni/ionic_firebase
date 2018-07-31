@@ -5,6 +5,7 @@ import { SalvarPage } from '../salvar/salvar'
 import { Observable } from 'rxjs/Observable'; //bug
 
 import { FirebaseProvider } from './../../providers/firebase/firebase';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @Component({
   selector: 'page-home',
@@ -14,8 +15,13 @@ export class HomePage {
 
   produtos: Observable<any>;
 
-  constructor(public navCtrl: NavController, public provider: FirebaseProvider, private toast: ToastController){
+  constructor(public navCtrl: NavController, public provider: FirebaseProvider,
+              private toast: ToastController, private db: AngularFireDatabase){
       this.produtos = this.provider.listarTodos();
+
+      //grava algo direto no banco sem passar pelo form e provider
+      //this.db.list('produtos/')
+      //  .push({ nome: 'teste', preco: '333', descricao: 'teste' });
   }
 
   adicionar(){

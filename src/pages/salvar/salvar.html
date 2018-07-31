@@ -1,13 +1,8 @@
-<!--
-  Generated template for the SalvarPage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
-    <ion-title>salvar</ion-title>
+    <ion-title>Salvar</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -15,22 +10,38 @@
 
 <ion-content padding>
 
+<form [formGroup]="form">
   <ion-item>
-    <ion-label fixed>Produto</ion-label>
-    <ion-input type="text" value="" [(ngModel)]="produto.nome"></ion-input>
+    <ion-label stacked>Produto</ion-label>
+    <ion-input type="text" formControlName="nome" ></ion-input>
+  </ion-item>
+  <ion-item *ngIf="!form.controls.nome.valid && (form.controls.nome.dirty || form.controls.nome.touched)" color="danger">
+    <div [hidden]="!form.controls.nome.errors.required">
+      O campo é obrigatório
+    </div>
   </ion-item>
 
   <ion-item>
-    <ion-label fixed>Preço</ion-label>
-    <ion-input type="number" [(ngModel)]="produto.preco"></ion-input>
+    <ion-label stacked>Preço</ion-label>
+    <ion-input type="number" formControlName="preco"></ion-input>
+  </ion-item>
+  <ion-item *ngIf="!form.controls.preco.valid && (form.controls.preco.dirty || form.controls.preco.touched)" color="danger">
+    <div [hidden]="!form.controls.preco.errors.required">
+      O campo é obrigatório
+    </div>
   </ion-item>
 
   <ion-item>
-    <ion-label fixed>descricao</ion-label>
-    <ion-input type="text" value="" [(ngModel)]="produto.descricao"></ion-input>
+    <ion-label stacked>Descrição</ion-label>
+    <ion-input type="text" formControlName="descricao"></ion-input>
+  </ion-item>
+  <ion-item *ngIf="!form.controls.descricao.valid && (form.controls.descricao.dirty || form.controls.descricao.touched)" color="danger">
+    <div [hidden]="!form.controls.descricao.errors.required">
+      O campo é obrigatório
+    </div>
   </ion-item>
 
   <button ion-button full (click)="salvar(produto)">Salvar</button>
-
+</form>
 
 </ion-content>
