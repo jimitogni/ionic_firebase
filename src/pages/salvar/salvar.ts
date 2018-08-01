@@ -10,12 +10,6 @@ import { FirebaseProvider } from '../../providers/firebase/firebase';
 })
 export class SalvarPage {
 
-  /*roduto = {
-    'nome': '',
-    'preco': '',
-    'descricao': ''
-  };*/
-
   produto: any;
   form: FormGroup;
   titulo: string;
@@ -42,7 +36,7 @@ export class SalvarPage {
     });
   }
 
-  salvar(produto){
+  salvar(){
     if (this.form.valid) {
       this.db.salvar(this.form.value)
         .then(() => {

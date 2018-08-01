@@ -30,10 +30,10 @@ export class HomePage {
 
   editar(produto: any) {
     // Maneira 1
-    //this.navCtrl.push('SalvarPage', { produto: produto });
+    this.navCtrl.push(SalvarPage, { produto: produto });
 
     // Maneira 2
-    this.navCtrl.push(SalvarPage, { key: produto.key });
+    //this.navCtrl.push(SalvarPage, { key: produto.key });
   }
 
   deletar(key: string) {

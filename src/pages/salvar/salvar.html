@@ -13,7 +13,7 @@
 <form [formGroup]="form">
   <ion-item>
     <ion-label stacked>Produto</ion-label>
-    <ion-input type="text" formControlName="nome" ></ion-input>
+      <ion-input type="text" value="{{produto.nome}}" formControlName="nome" ></ion-input>
   </ion-item>
   <ion-item *ngIf="!form.controls.nome.valid && (form.controls.nome.dirty || form.controls.nome.touched)" color="danger">
     <div [hidden]="!form.controls.nome.errors.required">
@@ -23,7 +23,7 @@
 
   <ion-item>
     <ion-label stacked>Preço</ion-label>
-    <ion-input type="number" formControlName="preco"></ion-input>
+    <ion-input type="number" value={{produto.preco}} formControlName="preco"></ion-input>
   </ion-item>
   <ion-item *ngIf="!form.controls.preco.valid && (form.controls.preco.dirty || form.controls.preco.touched)" color="danger">
     <div [hidden]="!form.controls.preco.errors.required">
@@ -33,7 +33,7 @@
 
   <ion-item>
     <ion-label stacked>Descrição</ion-label>
-    <ion-input type="text" formControlName="descricao"></ion-input>
+    <ion-input type="text" value={{produto.descricao}} formControlName="descricao"></ion-input>
   </ion-item>
   <ion-item *ngIf="!form.controls.descricao.valid && (form.controls.descricao.dirty || form.controls.descricao.touched)" color="danger">
     <div [hidden]="!form.controls.descricao.errors.required">
