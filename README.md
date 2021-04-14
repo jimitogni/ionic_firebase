@@ -1,5 +1,5 @@
 # ionicFirebase
 
-App IOMIC Gravando dados no firebase
+App IONIC Gravando dados no firebase
 
 IONIC app writing data on firebase
